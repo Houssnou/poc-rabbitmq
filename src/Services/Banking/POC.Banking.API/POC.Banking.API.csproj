@@ -14,4 +14,10 @@
     <Folder Include="Application\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\POC.EventBus\POC.EventBus.csproj" />
+    <ProjectReference Include="..\POC.Banking.Core\POC.Banking.Core.csproj" />
+    <ProjectReference Include="..\POC.Banking.Infrastructure\POC.Banking.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

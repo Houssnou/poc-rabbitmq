@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\" />
+    <Folder Include="Events\" />
     <Folder Include="Commands\" />
     <Folder Include="IntregrationEvents\Events\" />
     <Folder Include="IntregrationEvents\EventHandling\" />
+    <Folder Include="CommandHandlers\" />
+    <Folder Include="EventHandlers\" />
   </ItemGroup>
 
 </Project>
