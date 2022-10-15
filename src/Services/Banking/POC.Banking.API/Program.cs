@@ -1,5 +1,9 @@
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using POC.Banking.API.Extensions;
+using POC.Banking.Infrastructure.Data;
 using POC.EventBus.Extensions;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddDbContext<BankingDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("Banking")));
+builder.Services.AddApplicationServices();
+//builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddEventBusServices();
 builder.Services.AddSwaggerDocumentation();
 

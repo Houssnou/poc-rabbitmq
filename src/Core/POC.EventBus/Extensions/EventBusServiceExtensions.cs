@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace POC.EventBus.Extensions
             //        var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
             //        return new EventBusRabbitMQ(sp.GetRequiredService<IMediator>(), scopeFactory);
             //    });
-
+            services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient<IEventBus, EventBusRabbitMQ>();
             return services;
         }
