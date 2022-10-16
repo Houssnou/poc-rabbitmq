@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using POC.Banking.API.Extensions;
+using POC.Banking.API.Helpers;
 using POC.Banking.Infrastructure.Data;
 using POC.EventBus.Extensions;
 using System.Reflection;
@@ -13,11 +15,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddDbContext<BankingDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("Banking")));
+builder.Services.AddDbContextServices(builder.Configuration);
 builder.Services.AddApplicationServices();
-//builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+
 builder.Services.AddEventBusServices();
 builder.Services.AddSwaggerDocumentation();
+
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 var app = builder.Build();
 
@@ -33,4 +37,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.UseDbContextServices();
+
+//fire up 
+await app.RunAsync();

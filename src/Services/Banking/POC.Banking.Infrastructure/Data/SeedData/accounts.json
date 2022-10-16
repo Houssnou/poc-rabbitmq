@@ -1,0 +1,22 @@
+[
+  {
+    "Type": "Debit",
+    "Balance": 1000.00
+  },
+  {
+    "Type": "Savings",
+    "Balance": 100.00
+  },
+  {
+    "Type": "Debit",
+    "Balance": 1000000.00
+  },
+  {
+    "Type": "Savings",
+    "Balance": 10500.00
+  },
+  {
+    "Type": "Savings",
+    "Balance": 1000.00
+  }
+]
