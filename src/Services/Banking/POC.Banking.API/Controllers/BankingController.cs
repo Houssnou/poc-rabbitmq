@@ -22,5 +22,12 @@ namespace POC.Banking.API.Controllers
         {
             return Ok(await _accountService.GetAccounts());
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Post(TransfertDto transfertRequest)
+        {
+            await _accountService.TransfertAsync(transfertRequest.From, transfertRequest.To, transfertRequest.Amount);
+            return Ok(transfertRequest);
+        }
     }
 }

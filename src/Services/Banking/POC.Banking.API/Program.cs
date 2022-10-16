@@ -6,6 +6,7 @@ using POC.Banking.API.Helpers;
 using POC.Banking.Infrastructure.Data;
 using POC.EventBus.Extensions;
 using System.Reflection;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 

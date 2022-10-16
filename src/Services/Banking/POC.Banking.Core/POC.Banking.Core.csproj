@@ -8,11 +8,13 @@
 
   <ItemGroup>
     <Folder Include="Events\" />
-    <Folder Include="Commands\" />
     <Folder Include="IntregrationEvents\Events\" />
     <Folder Include="IntregrationEvents\EventHandling\" />
-    <Folder Include="CommandHandlers\" />
     <Folder Include="EventHandlers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\POC.Core\POC.Core.csproj" />
   </ItemGroup>
 
 </Project>
