@@ -8,7 +8,7 @@ namespace POC.Transfer.API.Extensions
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Banking Service API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Transfer Service API", Version = "v1" });
 
                 //var securitySchema = new OpenApiSecurityScheme
                 //{
@@ -35,7 +35,7 @@ namespace POC.Transfer.API.Extensions
         public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app)
         {
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Banking Service API v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Transfer Service API v1"));
 
             return app;
         }

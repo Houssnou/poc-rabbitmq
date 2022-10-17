@@ -2,18 +2,22 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text.Json;
+using Microsoft.Extensions.DependencyInjection;
+using POC.Core.Events;
 
 namespace POC.EventBus
 {
     public sealed class EventBusRabbitMQ : IEventBus
     {
         private readonly IMediator _mediator;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly Dictionary<string, List<Type>> _handlers;
         private readonly List<Type> _eventTypes;
 
-        public EventBusRabbitMQ(IMediator mediator)
+        public EventBusRabbitMQ(IMediator mediator, IServiceScopeFactory serviceScopeFactory)
         {
             _mediator = mediator;
+            _serviceScopeFactory = serviceScopeFactory;
             _handlers = new Dictionary<string, List<Type>>();
             _eventTypes = new List<Type>();
         }
@@ -83,8 +87,8 @@ namespace POC.EventBus
                 DispatchConsumersAsync = true
             };
 
-            using var connection = factory.CreateConnection();
-            using var channel = connection.CreateModel();
+             var connection = factory.CreateConnection();
+             var channel = connection.CreateModel();
 
             var eventName = typeof(T).Name;
 
@@ -93,7 +97,7 @@ namespace POC.EventBus
 
             consumer.Received += Consumer_Received;
 
-            channel.BasicConsume(eventName, true, consumer);
+            channel.BasicConsume(eventName, false, consumer);
         }
 
         private async Task Consumer_Received(object sender, BasicDeliverEventArgs args)
@@ -104,10 +108,12 @@ namespace POC.EventBus
             try
             {
                 await ProcessEvent(eventName, body).ConfigureAwait(false);
+                Console.WriteLine("Received message: {0}", eventName);
             }
             catch (Exception ex)
             {
-                // ignore for now.
+                Console.WriteLine("Failed to process received message: {0}", eventName);
+                throw;
             }
         }
 
@@ -115,11 +121,13 @@ namespace POC.EventBus
         {
             if (_handlers.ContainsKey(eventName))
             {
+                using var scope = _serviceScopeFactory.CreateScope();
+
                 var subcriptions = _handlers[eventName];
 
                 foreach (var sub in subcriptions)
                 {
-                    var handler = Activator.CreateInstance(sub);
+                    var handler = scope.ServiceProvider.GetService(sub);
 
                     if (handler == null) continue;
 
@@ -128,7 +136,7 @@ namespace POC.EventBus
                     var @event = JsonSerializer.Deserialize(body, eventType);
                     var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
 
-                    await (Task) concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
+                    await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
 
                 }
             }

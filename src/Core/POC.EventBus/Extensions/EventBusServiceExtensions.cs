@@ -12,14 +12,15 @@ namespace POC.EventBus.Extensions
     {
         public static IServiceCollection AddEventBusServices(this IServiceCollection services)
         {
-            //services.AddScoped<IEventBus, EventBusRabbitMQ>(
-            //    sp =>
-            //    {
-            //        var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
-            //        return new EventBusRabbitMQ(sp.GetRequiredService<IMediator>(), scopeFactory);
-            //    });
+            services.AddSingleton<IEventBus, EventBusRabbitMQ>(
+                sp =>
+                {
+                    var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
+                    return new EventBusRabbitMQ(sp.GetRequiredService<IMediator>(), scopeFactory);
+                });
+
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddTransient<IEventBus, EventBusRabbitMQ>();
+          //  services.AddTransient<IEventBus, EventBusRabbitMQ>();
             return services;
         }
     }

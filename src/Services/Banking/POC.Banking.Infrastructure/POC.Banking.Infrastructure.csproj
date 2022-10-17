@@ -28,4 +28,10 @@
     <ProjectReference Include="..\POC.Banking.Core\POC.Banking.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\SeedData\accounts.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

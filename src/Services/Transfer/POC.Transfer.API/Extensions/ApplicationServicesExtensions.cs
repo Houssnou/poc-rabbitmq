@@ -1,4 +1,7 @@
-﻿using POC.Transfer.Core.Interfaces;
+﻿using POC.Core.Bus;
+using POC.Transfer.Core.EventHandlers;
+using POC.Transfer.Core.Events;
+using POC.Transfer.Core.Interfaces;
 using POC.Transfer.Core.Interfaces.Repositories;
 using POC.Transfer.Infrastructure.Data.Repositories;
 using POC.Transfer.Infrastructure.Services;
@@ -11,9 +14,21 @@ namespace POC.Transfer.API.Extensions
         {
             services.AddTransient<ITransferRepository, TransferRepository>();
             services.AddTransient<ITransferService, TransferService>();
-            // services.AddTransient<IRequestHandler<NewTransferCommand, bool>, TransferCommandHandler>();
+
+            services.AddTransient<TransferCreatedEventHandler>();
+
+            services.AddTransient<IEventHandler<TransferCreatedEvent>, TransferCreatedEventHandler>();
 
             return services;
+        }
+
+        public static IApplicationBuilder UseEventBusSubscription(this IApplicationBuilder app)
+        {
+            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
+
+            eventBus.Subscribe<TransferCreatedEvent, TransferCreatedEventHandler>();
+
+            return app;
         }
     }
 }

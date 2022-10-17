@@ -1,6 +1,9 @@
+using POC.Core.Bus;
 using POC.EventBus.Extensions;
 using POC.Transfer.API.Extensions;
 using POC.Transfer.API.Helpers;
+using POC.Transfer.Core.EventHandlers;
+using POC.Transfer.Core.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +33,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseEventBusSubscription();
+
 //fire up 
-await app.RunAsync();
+app.Run();
 

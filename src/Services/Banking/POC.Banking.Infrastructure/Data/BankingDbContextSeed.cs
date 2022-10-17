@@ -13,8 +13,8 @@ public class BankingDbContextSeed
         {
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            //if (!context.Accounts.Any())
-            //{
+            if (!context.Accounts.Any())
+            {
                 var data = File.ReadAllText(path + @"/Data/SeedData/accounts.json");
 
                 var accounts = JsonSerializer.Deserialize<List<Account>>(data);
@@ -30,8 +30,7 @@ public class BankingDbContextSeed
 
                 await context.SaveChangesAsync();
 
-          //  }
-
+            }
             
         }
         catch (Exception ex)
