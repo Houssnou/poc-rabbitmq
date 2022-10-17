@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web Apps", "Web Apps", "{55191603-0FCE-466E-88B7-BE0B0710F454}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E69672D3-126F-40F9-B61F-FAC28EB07387}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{E661D930-CFC7-497B-9488-C40D255FC9D3}"
@@ -28,6 +26,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POC.Transfer.Core", "Services\Transfer\POC.Transfer.Core\POC.Transfer.Core.csproj", "{17380171-24DB-46A2-A154-AD54B0A60AFF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POC.Transfer.Infrastructure", "Services\Transfer\POC.Transfer.Insfrastructure\POC.Transfer.Infrastructure.csproj", "{1D62684E-F5CB-42AA-A94A-81CD54FF73C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadMe", "ReadMe", "{A7B0321F-85CD-4DD1-80E5-C80A1DD3750C}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		ReadMe.txt = ReadMe.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

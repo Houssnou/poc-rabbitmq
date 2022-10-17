@@ -97,7 +97,7 @@ namespace POC.EventBus
 
             consumer.Received += Consumer_Received;
 
-            channel.BasicConsume(eventName, false, consumer);
+            channel.BasicConsume(eventName, true, consumer);
         }
 
         private async Task Consumer_Received(object sender, BasicDeliverEventArgs args)

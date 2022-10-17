@@ -1,0 +1,18 @@
+version: '3.2'
+services:
+ #rabbitmq
+  rabbitmq:
+    image: rabbitmq:3.9.18-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=LuffyTaro
+      - RABBITMQ_DEFAULT_PASS=!@Mugiwarano$
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq/
+      - rabbitmq-log:/var/log/rabbitmq
+volumes:
+  rabbitmq-data:
+  rabbitmq-log:
