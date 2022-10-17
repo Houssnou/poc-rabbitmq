@@ -1,6 +1,6 @@
 # poc-rabbitmq
 Rabbitmq proof of concept: .Net microservices using RabbitMQ Messaging as broker.
-You must have Docker installed.
+> You must have Docker installed.
 
 1. Run docker-compose file to create an isntance of RabbitMQ on container:
    . navigate to the root folder of the solution 
