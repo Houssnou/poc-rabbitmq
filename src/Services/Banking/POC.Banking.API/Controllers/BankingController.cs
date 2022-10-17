@@ -5,7 +5,7 @@ using POC.Banking.Core.Interfaces;
 namespace POC.Banking.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class BankingController : ControllerBase
     {
         private readonly ILogger<BankingController> _logger;
